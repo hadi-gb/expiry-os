@@ -1,7 +1,8 @@
 
 # ExpiryOS
 
-A lightweight expiry intelligence system built with Google Sheets and Google Apps Script.
+ExpiryOS is a lightweight expiry management system built for warehouse and marketing teams. It combines Google Sheets, formulas, and Apps Script to automate expiry tracking, campaign preparation, and inventory actions while remaining fast and easy to maintain.
+ExpiryOS is designed to be extensible without modifying the code. Teams can add their own business columns (campaigns, Shopify tags, notes, etc.) while the core workflow continues to function.
 
 ## Features
 
