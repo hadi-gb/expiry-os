@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+
+# Apps Script / clasp
+.clasp.json
+.clasprc.json
+
+# Environment / secrets
+.env
+credentials.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Editor
+.vscode/
+.idea/
