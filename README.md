@@ -1,4 +1,4 @@
-# expiry-os
+
 # ExpiryOS
 
 A lightweight expiry intelligence system built with Google Sheets and Google Apps Script.
