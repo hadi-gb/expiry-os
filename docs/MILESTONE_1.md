@@ -10,7 +10,7 @@ At the end of this milestone, warehouse employees should be able to create new i
 
 # Features
 
-## Batch ID
+## Batch ID ✅ Completed
 
 - Automatic generation
 - Permanent identifier
