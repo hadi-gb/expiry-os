@@ -38,22 +38,27 @@ At the end of this milestone, warehouse employees should be able to:
 
 ---
 
-# Remaining Features
-
 ## Duplicate Detection
 
-Warn the user when an inventory batch already exists.
+Warns the user when an inventory batch already exists.
 
 Duplicate rule:
 
 - Barcode + Expiry
+- Product + Expiry when Barcode = NO BARCODE
 
 Allow the user to:
 
-- Open existing batch.
-- Create a new batch anyway.
+- Keep the edit and create the batch anyway.
+- Cancel and restore the previous value.
+
+Scoped to Expiry edits only, matching the warehouse workflow (barcode is a
+scan, rarely changed after entry; Expiry is the final step when receiving
+inventory).
 
 ---
+
+# Remaining Features
 
 ## NO BARCODE Support
 
@@ -92,10 +97,11 @@ The earliest expiry determines the batch priority.
 - [x] Product auto-fills.
 - [x] Batch ID generated automatically.
 - [x] Product recognition works after sheet sorting.
+- [x] Duplicate warning appears.
+- [x] NO BARCODE products supported.
 
 ## Remaining
 
-- [ ] Duplicate warning appears.
 - [ ] NO BARCODE products supported.
 - [ ] Gift sets supported.
 - [ ] Milestone 1 fully completed.
@@ -118,6 +124,6 @@ Milestone 1 Progress
 
 - [x] Batch ID
 - [x] Product Recognition
-- [ ] Duplicate Detection
-- [ ] NO BARCODE Support
-- [ ] Gift Set Support
+- [x] Duplicate Detection
+- [x] NO BARCODE Support
+- [ ] Multi-Expiry Support
