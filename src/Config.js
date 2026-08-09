@@ -9,8 +9,10 @@ const CONFIG = {
     BATCH_ID: "Batch ID",
     BARCODE: "Barcode",
     BRAND: "Brand",
-    PRODUCT: "Product"
+    PRODUCT: "Product",
+    EXPIRY: "Expiry"
   },
+  NO_BARCODE_VALUE: "NO BARCODE",
   BATCH_ID_PREFIX: "BAT-",
   BATCH_ID_PAD_LENGTH: 6
 };

@@ -15,12 +15,12 @@ function onEdit(e) {
     return;
   }
 
+  const headerMap = getHeaderMap(sheet);
+
   const lock = LockService.getScriptLock();
   lock.waitLock(30000);
 
   try {
-    const headerMap = getHeaderMap(sheet);
-
     let nextNumber = getNextBatchNumber(sheet, headerMap);
     for (let row = firstDataRow; row <= editEndRow; row++) {
       nextNumber = ensureBatchId(sheet, row, headerMap, nextNumber);
@@ -33,5 +33,14 @@ function onEdit(e) {
     }
   } finally {
     lock.releaseLock();
+  }
+
+  // Runs outside the lock: the confirmation dialog blocks on human input,
+  // and holding the lock during that would stall other concurrent edits.
+  // Scoped to Expiry only — Barcode is almost always a scan that's rarely
+  // changed afterwards, and Expiry is the final step of receiving inventory,
+  // so this is the one point where the row's duplicate key is genuinely settled.
+  if (isSingleCellEdit(e.range) && editTouchesColumn(e.range, headerMap, CONFIG.HEADERS.EXPIRY)) {
+    checkForDuplicate(sheet, firstDataRow, headerMap, e);
   }
 }

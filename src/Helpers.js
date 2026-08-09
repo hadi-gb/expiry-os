@@ -59,6 +59,13 @@ function getColumn(headerMap, headerName) {
 }
 
 /**
+ * True if an edited range is exactly one cell.
+ */
+function isSingleCellEdit(range) {
+  return range.getNumRows() === 1 && range.getNumColumns() === 1;
+}
+
+/**
  * True if a header's column falls within the range of columns touched by an
  * edit. Lets onEdit scope logic to a specific column regardless of whether
  * the edit was a single cell or a multi-column paste.
@@ -91,4 +98,18 @@ function isRowEmpty(sheet, row, headerMap) {
 function formatBatchId(number) {
   const padded = String(number).padStart(CONFIG.BATCH_ID_PAD_LENGTH, "0");
   return CONFIG.BATCH_ID_PREFIX + padded;
+}
+
+/**
+ * Parses the numeric portion of a Batch ID, e.g. "BAT-000127" -> 127.
+ * Returns null if the value isn't a well-formed Batch ID.
+ */
+function parseBatchNumber(batchId) {
+  const id = String(batchId).trim();
+  if (id.indexOf(CONFIG.BATCH_ID_PREFIX) !== 0) {
+    return null;
+  }
+
+  const number = parseInt(id.slice(CONFIG.BATCH_ID_PREFIX.length), 10);
+  return isNaN(number) ? null : number;
 }

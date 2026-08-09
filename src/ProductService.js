@@ -4,20 +4,6 @@
  */
 
 /**
- * Parses the numeric portion of a Batch ID, e.g. "BAT-000127" -> 127.
- * Returns null if the value isn't a well-formed Batch ID.
- */
-function parseBatchNumber(batchId) {
-  const id = String(batchId).trim();
-  if (id.indexOf(CONFIG.BATCH_ID_PREFIX) !== 0) {
-    return null;
-  }
-
-  const number = parseInt(id.slice(CONFIG.BATCH_ID_PREFIX.length), 10);
-  return isNaN(number) ? null : number;
-}
-
-/**
  * Finds the row containing a given barcode whose Batch ID number is the
  * highest among all matches, so the latest valid batch defines the product
  * regardless of physical row order (e.g. after sorting). Rows with a blank
