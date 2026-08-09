@@ -16,7 +16,7 @@
  * earliest date) without touching the rest of this file.
  */
 function normalizeExpiryValue(value) {
-  if (Object.prototype.toString.call(value) === "[object Date]") {
+  if (isDateValue(value)) {
     return Utilities.formatDate(value, Session.getScriptTimeZone(), "yyyy-MM-dd");
   }
   return String(value).trim();
@@ -28,7 +28,7 @@ function normalizeExpiryValue(value) {
  * purely for a human-readable dd-MM-yyyy presentation.
  */
 function formatExpiryForDisplay(value) {
-  if (Object.prototype.toString.call(value) === "[object Date]") {
+  if (isDateValue(value)) {
     return Utilities.formatDate(value, Session.getScriptTimeZone(), "dd-MM-yyyy");
   }
   return String(value).trim();

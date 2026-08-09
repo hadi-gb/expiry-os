@@ -59,6 +59,13 @@ function getColumn(headerMap, headerName) {
 }
 
 /**
+ * True if a cell value is a real Date object, as opposed to text or a number.
+ */
+function isDateValue(value) {
+  return Object.prototype.toString.call(value) === "[object Date]";
+}
+
+/**
  * True if an edited range is exactly one cell.
  */
 function isSingleCellEdit(range) {
@@ -112,4 +119,59 @@ function parseBatchNumber(batchId) {
 
   const number = parseInt(id.slice(CONFIG.BATCH_ID_PREFIX.length), 10);
   return isNaN(number) ? null : number;
+}
+
+/**
+ * Returns a column's spreadsheet letter (e.g. "E"), reusing Sheets' own A1
+ * notation rather than reimplementing column-number-to-letter conversion.
+ */
+function getColumnLetter(sheet, column) {
+  return sheet.getRange(1, column).getA1Notation().replace(/\d+$/, "");
+}
+
+/**
+ * Resolves a column by header name, inserting it immediately after
+ * afterColumn (with the given header text) if it doesn't already exist.
+ * Returns the column's index either way. Used by one-time setup utilities
+ * so they never hardcode a column position.
+ */
+function ensureColumnAfter(sheet, headerMap, afterColumn, headerName) {
+  const column = headerMap[normalizeHeader(headerName)];
+  if (column) {
+    return column;
+  }
+
+  const newColumn = afterColumn + 1;
+  sheet.insertColumnAfter(afterColumn);
+  sheet.getRange(1, newColumn).setValue(headerName);
+  return newColumn;
+}
+
+/**
+ * Writes a formula into a cell, but refuses to overwrite it if it already
+ * holds a manually entered value, or a formula that doesn't look like ours
+ * (detected via a marker substring expected to appear only in formulas this
+ * project generates). Throws instead of silently clobbering existing data —
+ * shared by every setup utility that writes a formula into an anchor cell,
+ * so they all get the same overwrite protection.
+ */
+function setFormulaIfSafe(cell, formula, formulaMarker, label) {
+  const existingFormula = cell.getFormula();
+  const isOwnFormula = existingFormula.indexOf(formulaMarker) !== -1;
+
+  if (existingFormula === "" && cell.getValue() !== "") {
+    throw new Error(
+      label + " (row " + cell.getRow() + ") already contains a manually entered value. " +
+      "Refusing to overwrite it — clear the cell first if you want the formula regenerated."
+    );
+  }
+
+  if (existingFormula !== "" && !isOwnFormula) {
+    throw new Error(
+      label + " (row " + cell.getRow() + ") already contains a different formula. " +
+      "Refusing to overwrite it — clear the cell first if you want the formula regenerated."
+    );
+  }
+
+  cell.setFormula(formula);
 }

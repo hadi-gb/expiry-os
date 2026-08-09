@@ -11,7 +11,6 @@ At the end of this milestone, warehouse employees should be able to:
 - Generate permanent Batch IDs.
 - Prevent duplicate inventory records.
 - Support products without barcodes.
-- Support gift sets with multiple expiry dates.
 
 ---
 
@@ -58,36 +57,6 @@ inventory).
 
 ---
 
-# Remaining Features
-
-## NO BARCODE Support
-
-Allow products without barcodes.
-
-When Barcode =
-
-NO BARCODE
-
-Duplicate detection should instead use:
-
-- Product + Expiry
-
----
-
-## Gift Set Support
-
-Support products containing multiple expiry dates.
-
-Example:
-
-Cleanser : 09-2027
-SPF : 12-2027
-Serum : 04-2028
-
-The earliest expiry determines the batch priority.
-
----
-
 # Acceptance Criteria
 
 ## Completed
@@ -100,12 +69,6 @@ The earliest expiry determines the batch priority.
 - [x] Duplicate warning appears.
 - [x] NO BARCODE products supported.
 
-## Remaining
-
-- [ ] NO BARCODE products supported.
-- [ ] Gift sets supported.
-- [ ] Milestone 1 fully completed.
-
 ---
 
 # Deliverables
@@ -117,13 +80,10 @@ The earliest expiry determines the batch priority.
 - Extensible foundation for future milestones.
 
 ---
+✅ Milestone 1 Complete
 
-# Progress
+Release:
+v0.1.0
 
-Milestone 1 Progress
-
-- [x] Batch ID
-- [x] Product Recognition
-- [x] Duplicate Detection
-- [x] NO BARCODE Support
-- [ ] Multi-Expiry Support
+Next:
+Milestone 2 – Expiry Intelligence Engine

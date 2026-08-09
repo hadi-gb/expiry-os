@@ -2,16 +2,12 @@
 
 ## Scope
 
-Covers the three completed features on the `Master Inventory` sheet:
+Covers the completed Master Inventory features:
 
 - Batch ID generation
-- Product Recognition (Barcode auto-fill)
+- Product Recognition
 - Duplicate Detection
-
-NO BARCODE Support and Gift Set / Multi-Expiry Support are **out of scope**
-(see bottom) — NO BARCODE's duplicate-key behavior is already exercised
-indirectly by the Duplicate Detection cases below, since that logic already
-lives in `DuplicateDetectionService.js`.
+- NO BARCODE Support
 
 ## Prerequisites
 
