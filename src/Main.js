@@ -20,10 +20,16 @@ function onEdit(e) {
 
   try {
     const headerMap = getHeaderMap(sheet);
-    let nextNumber = getNextBatchNumber(sheet, headerMap);
 
+    let nextNumber = getNextBatchNumber(sheet, headerMap);
     for (let row = firstDataRow; row <= editEndRow; row++) {
       nextNumber = ensureBatchId(sheet, row, headerMap, nextNumber);
+    }
+
+    if (editTouchesColumn(e.range, headerMap, CONFIG.HEADERS.BARCODE)) {
+      for (let row = firstDataRow; row <= editEndRow; row++) {
+        recognizeProduct(sheet, row, headerMap);
+      }
     }
   } finally {
     lock.releaseLock();

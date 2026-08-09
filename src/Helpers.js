@@ -59,6 +59,18 @@ function getColumn(headerMap, headerName) {
 }
 
 /**
+ * True if a header's column falls within the range of columns touched by an
+ * edit. Lets onEdit scope logic to a specific column regardless of whether
+ * the edit was a single cell or a multi-column paste.
+ */
+function editTouchesColumn(range, headerMap, headerName) {
+  const column = getColumn(headerMap, headerName);
+  const startColumn = range.getColumn();
+  const endColumn = startColumn + range.getNumColumns() - 1;
+  return column >= startColumn && column <= endColumn;
+}
+
+/**
  * True if every mapped column in the given row is blank.
  */
 function isRowEmpty(sheet, row, headerMap) {
