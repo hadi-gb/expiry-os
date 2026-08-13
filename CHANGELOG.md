@@ -6,6 +6,60 @@ The format is based on Keep a Changelog and follows Semantic Versioning.
 
 ---
 
+## [0.3.0] - 2026-08-13
+
+### Added
+
+- Action Center: automatically generated, row-for-row mirror of Master
+  Inventory, filtered to batches at 12 months remaining or less (or
+  expired)
+- Action Center editable columns: Action (dropdown), Notes (free text),
+  Stock Completed (checkbox)
+- Completed Batches (Archive): permanent snapshot on Stock Completed, with
+  automatic Completed Date (full timestamp) and Completed By
+- Support for user-added business columns in both Action Center and
+  Completed Batches, carried through automatically by header name
+- `ActionCenterService.js`, `ArchiveService.js`
+- `findRowByBatchId()` and `ensureHeaders()` in `Helpers.js`
+- `onOpen()` trigger
+- Milestone 3 documentation, architecture doc, and production test plan
+
+### Changed
+
+- `Main.js`'s `onEdit` dispatcher extended with an Action Center branch
+  (Master Inventory's existing behavior unchanged, extracted into its own
+  function)
+- Master Inventory gained a `Quantity` column (required for Action
+  Center's display)
+
+### Fixed
+
+- `CONFIG` referenced before it was defined, due to Apps Script's file
+  load order (top-level constants converted to functions)
+- Crash creating a sheet's header map on a brand-new, completely empty
+  sheet
+- A hard editor-list protection on Action Center's formula columns broke
+  the completion workflow for any non-owner user, since `onEdit` runs as a
+  simple trigger under the editing user's own permissions — switched to a
+  warning-only protection
+- `Expiry Offset` silently inheriting a date number format since
+  Milestone 2, corrupting numeric values written to Completed Batches —
+  fixed at the source in `StatusEngine.js`
+- A native Sheets Filter does not auto-refresh when the value it filters
+  on changes via formula recalculation — added an explicit refresh on
+  `onOpen` and on relevant Master Inventory edits
+- Completing a batch occupying row 2 of Master Inventory or Action Center
+  could destroy that sheet's live formula infrastructure outright, not
+  just remove data — Action Center's row is no longer deleted at all
+  (only its editable columns, explicitly shifted); Master Inventory's
+  formulas are defensively reasserted after every row deletion
+- An initial `Range.deleteCells()`-based implementation of the above did
+  not reliably shift Action Center's editable columns in practice,
+  causing a completed batch's Action/Notes to become misattributed to the
+  next batch — replaced with an explicit `getValues()`/`setValues()` shift
+
+---
+
 ## [0.2.0] - 2026-08-09
 
 ### Added

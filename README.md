@@ -68,6 +68,20 @@ Expires This Month
 
 ---
 
+## 📋 Action Center
+
+- Automatically generated, formula-driven view of batches at 12 months
+  remaining or less (or already expired) — never a second copy of Master
+  Inventory's data
+- Editable Action (dropdown), Notes (free text), and Stock Completed
+  (checkbox) columns
+- Checking Stock Completed archives the batch to a permanent Completed
+  Batches sheet, with Completed Date (full timestamp) and Completed By
+  recorded automatically, and removes it from Master Inventory
+- Supports user-added business columns without any code changes
+
+---
+
 # Architecture
 
 ExpiryOS follows a modular architecture where each component has a single responsibility.
@@ -117,7 +131,9 @@ ExpiryOS/
 │   ├── DuplicateDetectionService.js
 │   ├── ExpiryEngine.js
 │   ├── StatusEngine.js
-│   └── SheetFormatting.js
+│   ├── SheetFormatting.js
+│   ├── ActionCenterService.js
+│   └── ArchiveService.js
 │
 ├── docs/
 │   ├── PRD.md
@@ -126,6 +142,9 @@ ExpiryOS/
 │   ├── MILESTONE_1_TEST_PLAN.md
 │   ├── MILESTONE_2.md
 │   ├── MILESTONE_2_TEST_PLAN.md
+│   ├── MILESTONE_3.md
+│   ├── MILESTONE_3_ARCHITECTURE.md
+│   ├── MILESTONE_3_TEST_PLAN.md
 │
 ├── CHANGELOG.md
 ├── ROADMAP.md
@@ -141,7 +160,7 @@ ExpiryOS/
 |-----------|--------|
 | ✅ Master Inventory Foundation | Complete |
 | ✅ Expiry Intelligence Engine | Complete |
-| 🚧 Action Center | Planned |
+| ✅ Action Center | Complete |
 | 🚧 Dashboard & Analytics | Planned |
 | 🚧 Product Definition Management | Planned |
 
@@ -212,6 +231,8 @@ clasp push
 setupEarliestExpiryColumn();
 setupStatusColumns();
 setupSheetFormatting();
+setupActionCenter();
+setupCompletedBatches();
 ```
 
 ---
@@ -222,6 +243,7 @@ Each completed milestone includes a dedicated production test plan.
 
 - `docs/MILESTONE_1_TEST_PLAN.md`
 - `docs/MILESTONE_2_TEST_PLAN.md`
+- `docs/MILESTONE_3_TEST_PLAN.md`
 
 ---
 
@@ -231,7 +253,7 @@ ExpiryOS follows **Semantic Versioning**.
 
 Current release:
 
-**v0.2.0**
+**v0.3.0**
 
 See **CHANGELOG.md** for a complete release history.
 
@@ -241,10 +263,10 @@ See **CHANGELOG.md** for a complete release history.
 
 The next planned milestones include:
 
-- Action Center
 - Dashboard & Analytics
 - Product Definition Management
-- Inventory Archive Workflow
+- Automatic sort-by-nearest-expiry in Action Center (deferred from
+  Milestone 3 — see `docs/MILESTONE_3_ARCHITECTURE.md`)
 
 See **ROADMAP.md** for the complete development roadmap.
 

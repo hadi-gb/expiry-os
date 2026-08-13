@@ -31,14 +31,25 @@ Status: Complete
 
 ---
 
-### ⏳ Milestone 3 — Action Center
+### ✅ Milestone 3 — Action Center
 
-Planned:
+- Automatically generated, formula-driven Action Center view
+- Editable Action / Notes / Stock Completed columns
+- Archive completed batches (Completed Batches sheet), with automatic
+  Completed Date and Completed By
+- Automatic removal from Master Inventory on completion
+- Support for user-added business columns
 
-- Archive completed batches
-- Remove expired inventory
-- Warehouse actions
-- Action history
+Status: Complete
+
+Deferred to a future milestone:
+
+- Automatic sort-by-nearest-expiry in Action Center. Evaluated during
+  Milestone 3 (see `docs/MILESTONE_3_ARCHITECTURE.md` Section 2); a
+  read-only, formula-driven sorted re-presentation of Action Center's own
+  data was designed as the lowest-risk approach, but building it was
+  deferred to keep Milestone 3's release scope to what's implemented and
+  tested. Status color-coding is the interim urgency signal.
 
 ---
 

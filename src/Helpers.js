@@ -32,8 +32,17 @@ function isSameSheetName(sheet, expectedName) {
  */
 function getHeaderMap(sheet) {
   const lastColumn = sheet.getLastColumn();
-  const headerRow = sheet.getRange(1, 1, 1, lastColumn).getValues()[0];
   const headerMap = {};
+
+  // A brand-new sheet (e.g. just created via insertSheet(), before any
+  // header has been written) reports 0 columns — getRange(1, 1, 1, 0)
+  // would throw ("number of columns must be at least 1"), so short-circuit
+  // to an empty map rather than treating "no content yet" as an error.
+  if (lastColumn === 0) {
+    return headerMap;
+  }
+
+  const headerRow = sheet.getRange(1, 1, 1, lastColumn).getValues()[0];
 
   headerRow.forEach(function (header, index) {
     const normalized = normalizeHeader(header);
@@ -145,6 +154,57 @@ function ensureColumnAfter(sheet, headerMap, afterColumn, headerName) {
   sheet.insertColumnAfter(afterColumn);
   sheet.getRange(1, newColumn).setValue(headerName);
   return newColumn;
+}
+
+/**
+ * Finds the row whose Batch ID column matches the given batch ID exactly
+ * (in any sheet that has a Batch ID column). Returns null if not found.
+ * Always re-scans live — callers must resolve a row this way at the moment
+ * they need it rather than reusing a row number captured earlier, since a
+ * prior operation in the same flow may have deleted rows and shifted
+ * everything below.
+ */
+function findRowByBatchId(sheet, headerMap, batchId) {
+  const column = getColumn(headerMap, CONFIG.HEADERS.BATCH_ID);
+  const lastRow = sheet.getLastRow();
+  if (lastRow < 2) {
+    return null;
+  }
+
+  const target = String(batchId).trim();
+  const ids = sheet.getRange(2, column, lastRow - 1, 1).getValues();
+
+  for (let i = 0; i < ids.length; i++) {
+    if (String(ids[i][0]).trim() === target) {
+      return i + 2;
+    }
+  }
+
+  return null;
+}
+
+/**
+ * Ensures every header in `headers` exists as a column in the sheet,
+ * appending any missing ones at the end (in the given order) without
+ * disturbing existing columns or their positions. Returns the resulting
+ * header map. Used to grow an append-only sheet's schema on demand, e.g.
+ * Completed Batches picking up a column it hasn't seen before.
+ */
+function ensureHeaders(sheet, headers) {
+  const headerMap = getHeaderMap(sheet);
+
+  headers.forEach(function (headerName) {
+    const normalized = normalizeHeader(headerName);
+    if (normalized === "" || normalized in headerMap) {
+      return;
+    }
+
+    const newColumn = sheet.getLastColumn() + 1;
+    sheet.getRange(1, newColumn).setValue(headerName);
+    headerMap[normalized] = newColumn;
+  });
+
+  return headerMap;
 }
 
 /**

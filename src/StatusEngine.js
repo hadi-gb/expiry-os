@@ -146,6 +146,18 @@ function setupStatusColumns() {
   );
 
   sheet.setColumnWidth(expiryOffsetColumn, EXPIRY_OFFSET_COLUMN_WIDTH);
+
+  // insertColumnAfter() (inside ensureColumnAfter()) carries over the
+  // preceding column's formatting, so a freshly-created Expiry Offset
+  // column inherits Earliest Expiry's date format even though its values
+  // are plain month-difference integers. Display is harmless (the column
+  // is compressed/hidden), but a date-formatted cell makes
+  // Range.getValues() return a JS Date instead of a Number — surfaced by
+  // Milestone 3 code reading this column programmatically. Force plain
+  // integer format so this column's values are actually numbers wherever
+  // they're read, not just wherever they're displayed.
+  sheet.getRange(2, expiryOffsetColumn, sheet.getMaxRows() - 1, 1).setNumberFormat("0");
+
   const expiryOffsetLetter = getColumnLetter(sheet, expiryOffsetColumn);
 
   // Re-fetch: inserting Expiry Offset shifts column indices for anything
