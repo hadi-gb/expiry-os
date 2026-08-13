@@ -1,5 +1,10 @@
 # ExpiryOS - Product Requirements Document (PRD)
 
+> This document captures ExpiryOS's original product requirements and full
+> long-term vision, written before implementation began. Not every item
+> below has shipped — see `README.md` for current features and
+> `ROADMAP.md` for what's planned next.
+
 ## Vision
 
 ExpiryOS is a lightweight expiry operations system built for warehouse and marketing teams using Google Sheets and Google Apps Script.
@@ -8,7 +13,7 @@ Its goal is to help businesses identify expiring inventory early, coordinate mar
 
 ---
 
-# Problem
+## Problem
 
 Most small and medium businesses already have inventory systems.
 
@@ -24,9 +29,9 @@ ExpiryOS fills that gap.
 
 ---
 
-# Users
+## Users
 
-## Warehouse
+### Warehouse
 
 Responsibilities
 
@@ -37,7 +42,7 @@ Responsibilities
 
 ---
 
-## Marketing
+### Marketing
 
 Responsibilities
 
@@ -49,7 +54,7 @@ Responsibilities
 
 ---
 
-## Managers
+### Managers
 
 Responsibilities
 
@@ -59,7 +64,7 @@ Responsibilities
 
 ---
 
-# Goals
+## Goals
 
 - Extremely fast data entry
 - Minimal user training
@@ -69,7 +74,7 @@ Responsibilities
 
 ---
 
-# Non Goals
+## Non Goals
 
 ExpiryOS is NOT:
 
@@ -80,7 +85,7 @@ ExpiryOS is NOT:
 
 ---
 
-# Core Workflow
+## Core Workflow
 
 Warehouse
 
@@ -152,7 +157,7 @@ Dashboard updates automatically.
 
 ---
 
-# MVP Features
+## MVP Features
 
 - Barcode recognition
 - Duplicate batch detection
@@ -165,7 +170,7 @@ Dashboard updates automatically.
 
 ---
 
-# Future Features
+## Future Features
 
 - Email reminders
 - Mobile scanner

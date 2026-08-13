@@ -99,6 +99,12 @@ The format is based on Keep a Changelog and follows Semantic Versioning.
 
 ---
 
+[0.3.0]: https://github.com/hadi-gb/expiry-os/tree/v0.3.0
+[0.2.0]: https://github.com/hadi-gb/expiry-os/tree/v0.2.0
+[0.1.0]: https://github.com/hadi-gb/expiry-os/tree/v0.1.0
+
+---
+
 ## [0.1.0] - 2026-08-08
 
 ### Added

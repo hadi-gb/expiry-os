@@ -13,9 +13,9 @@ At the end of this milestone, warehouse employees should be able to:
 
 ---
 
-# Completed Features ✅
+## Completed Features ✅
 
-## Multi-Expiry Parsing
+### Multi-Expiry Parsing
 
 Supports one or many expiry dates inside the Expiry column.
 
@@ -40,7 +40,7 @@ Features:
 
 ---
 
-## Earliest Expiry Engine
+### Earliest Expiry Engine
 
 Automatically extracts the earliest expiry from every inventory batch.
 
@@ -54,7 +54,7 @@ Features:
 
 ---
 
-## Shelf-Life Engine
+### Shelf-Life Engine
 
 Calculates remaining shelf life from the Earliest Expiry.
 
@@ -69,7 +69,7 @@ Uses calendar-month calculations instead of day precision to match warehouse wor
 
 ---
 
-## Status Engine
+### Status Engine
 
 Automatically classifies inventory priority.
 
@@ -90,7 +90,7 @@ Features:
 
 ---
 
-## Sheet Formatting
+### Sheet Formatting
 
 Automatic setup utilities configure:
 
@@ -103,7 +103,7 @@ Automatic setup utilities configure:
 
 ---
 
-# Architecture
+## Architecture
 
 Milestone 2 follows the Formula First philosophy.
 
@@ -133,7 +133,7 @@ No feature re-parses the Expiry field.
 
 ---
 
-# Acceptance Criteria
+## Acceptance Criteria
 
 - [x] Multiple expiries supported
 - [x] Earliest expiry extracted automatically
@@ -146,7 +146,7 @@ No feature re-parses the Expiry field.
 
 ---
 
-# Deliverables
+## Deliverables
 
 - ExpiryEngine.js
 - StatusEngine.js

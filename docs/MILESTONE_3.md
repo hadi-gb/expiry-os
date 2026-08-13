@@ -18,9 +18,9 @@ At the end of this milestone, Marketing should be able to:
 
 ---
 
-# Completed Features ✅
+## Completed Features ✅
 
-## Action Center
+### Action Center
 
 - Automatically generated, row-for-row mirror of Master Inventory (Batch
   ID, Barcode, Brand, Product, Quantity, Months Remaining, Status), via
@@ -38,7 +38,7 @@ At the end of this milestone, Marketing should be able to:
 
 ---
 
-## Completed Batches (Archive)
+### Completed Batches (Archive)
 
 - Checking Stock Completed snapshots the batch's full data — every Master
   Inventory column, plus Action/Notes/business columns — into a permanent,
@@ -52,7 +52,7 @@ At the end of this milestone, Marketing should be able to:
 
 ---
 
-## Reliability work (found and fixed during this milestone's test pass)
+### Reliability work (found and fixed during this milestone's test pass)
 
 Not originally scoped features, but load-bearing fixes without which the
 milestone would not be safe to release:
@@ -75,9 +75,9 @@ Full write-ups: `docs/MILESTONE_3_ARCHITECTURE.md` Sections 6–8.
 
 ---
 
-# Acceptance Criteria
+## Acceptance Criteria
 
-## Completed
+### Completed
 
 - [x] Action Center is automatically generated from Master Inventory.
 - [x] Only batches at ≤12 months remaining or expired are shown.
@@ -95,7 +95,7 @@ Full write-ups: `docs/MILESTONE_3_ARCHITECTURE.md` Sections 6–8.
 - [x] Business columns added by users are supported without code changes,
       in both Action Center and Completed Batches.
 
-## Explicitly deferred (see Roadmap)
+### Explicitly deferred (see Roadmap)
 
 - [ ] Automatic sort-by-nearest-expiry in Action Center — evaluated,
       requested, and deliberately deferred to keep this milestone's
@@ -106,7 +106,7 @@ Full write-ups: `docs/MILESTONE_3_ARCHITECTURE.md` Sections 6–8.
 
 ---
 
-# Deliverables
+## Deliverables
 
 - `ActionCenterService.js`
 - `ArchiveService.js`

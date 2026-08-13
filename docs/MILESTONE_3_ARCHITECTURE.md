@@ -12,7 +12,7 @@ Center becoming a second source of truth.
 
 ---
 
-# 1. Fit with the existing system
+## 1. Fit with the existing system
 
 Reuses, unchanged:
 
@@ -44,7 +44,7 @@ New: `CONFIG.HEADERS.QUANTITY` and a `Quantity` column in Master Inventory
 
 ---
 
-# 2. Why no reconciliation
+## 2. Why no reconciliation
 
 First pass used a compacting `FILTER()`/`SORT()` spill for the display
 columns, with an Apps-Script sync step to keep the editable columns aligned
@@ -117,9 +117,9 @@ scope to what was already implemented and tested.
 
 ---
 
-# 3. Architecture
+## 3. Architecture
 
-## 3.1 Action Center sheet layout
+### 3.1 Action Center sheet layout
 
 | Col | Header | Source |
 |---|---|---|
@@ -146,7 +146,7 @@ Protection: A–H carry a warning-only protection (confirmation prompt on
 manual edit/sort, no hard editor-list ACL — see Section 2 and 6 for why);
 I–L+ stay editable and unprotected.
 
-## 3.2 Stock Completed flow
+### 3.2 Stock Completed flow
 
 `onEdit`, scoped to Action Center, `Stock Completed` column, `TRUE`:
 
@@ -181,7 +181,7 @@ Step (c) before (d), always. If the snapshot write throws, the batch stays
 in both sheets — the safe failure mode. Wrapped in the same `LockService`
 pattern `Main.js` already uses.
 
-## 3.3 Completed Batches sheet
+### 3.3 Completed Batches sheet
 
 All Master Inventory columns (as values) + `Action` + `Notes` + any ad-hoc
 Action Center business columns + `Completed Date` (full timestamp) +
@@ -190,7 +190,7 @@ formula elsewhere.
 
 ---
 
-# 4. Data flow
+## 4. Data flow
 
 ```
 Master Inventory (source of truth)
@@ -222,7 +222,7 @@ Action Center reflects the change automatically
 
 ---
 
-# 5. Edge cases
+## 5. Edge cases
 
 - **Batch crosses the 12-month line with the sheet closed.** Confirmed by
   testing that the Filter does *not* re-evaluate on its own here (Section
@@ -253,7 +253,7 @@ Action Center reflects the change automatically
 
 ---
 
-# 6. Regression finding: protection vs. simple-trigger permissions
+## 6. Regression finding: protection vs. simple-trigger permissions
 
 Found during post-implementation regression review, before any real
 completion had been run against a shared spreadsheet.
@@ -313,7 +313,7 @@ solution within Apps Script's execution model:
 
 ---
 
-# 7. Regression finding: Filter does not auto-refresh on formula-only value changes
+## 7. Regression finding: Filter does not auto-refresh on formula-only value changes
 
 Found during manual testing, after implementation: editing a Master
 Inventory row's `Expiry` so its `Status` changed from `SAFE` to `HIGH`
@@ -350,7 +350,7 @@ alignment — it only concerns which rows the Filter currently shows.
 
 ---
 
-# 8. Regression finding: completing a batch could destroy formula infrastructure, not just data
+## 8. Regression finding: completing a batch could destroy formula infrastructure, not just data
 
 The most serious finding from Milestone 3 testing, found only once actual
 completions were run against a spreadsheet with more than a handful of

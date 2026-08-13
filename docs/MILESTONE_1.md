@@ -14,9 +14,9 @@ At the end of this milestone, warehouse employees should be able to:
 
 ---
 
-# Completed Features ✅
+## Completed Features ✅
 
-## Batch ID
+### Batch ID
 
 - Automatic Batch ID generation.
 - Permanent unique identifier.
@@ -26,7 +26,7 @@ At the end of this milestone, warehouse employees should be able to:
 
 ---
 
-## Product Recognition
+### Product Recognition
 
 - Existing barcode automatically fills:
   - Brand
@@ -37,7 +37,7 @@ At the end of this milestone, warehouse employees should be able to:
 
 ---
 
-## Duplicate Detection
+### Duplicate Detection
 
 Warns the user when an inventory batch already exists.
 
@@ -57,9 +57,9 @@ inventory).
 
 ---
 
-# Acceptance Criteria
+## Acceptance Criteria
 
-## Completed
+### Completed
 
 - [x] Warehouse can scan existing products.
 - [x] Brand auto-fills.
@@ -71,7 +71,7 @@ inventory).
 
 ---
 
-# Deliverables
+## Deliverables
 
 - Master Inventory workflow.
 - Formula-first implementation.
